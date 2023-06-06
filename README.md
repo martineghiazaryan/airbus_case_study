@@ -17,9 +17,30 @@
 
 
 ## Introduction
-Talk about the problem.
-Talk about the work done.
-talk about the notebooks (whats the difference between them).
+
+This project aims to build a semantic segmentation model using the U-Net architecture to address the task of ship detection in satellite images. The goal is to accurately identify and delineate ships within the images, which can have significant applications in maritime surveillance, naval navigation, and environmental monitoring.
+
+### Problem Statement
+The task involves segmenting ships from satellite images, which is a challenging problem in computer vision. Semantic segmentation requires assigning a specific class label to each pixel in an image, making it an essential technique for object recognition and scene understanding.
+
+### Work Done
+In this project, I trained a U-Net model using tf.keras, a high-level neural networks API in Python. The U-Net architecture is well-suited for image segmentation tasks due to its ability to classify pixels efficiently and handle complex data patterns.
+
+The model was trained and evaluated using the Dice score, which measures the overlap between predicted and ground truth segmentations. A higher Dice score indicates a better match between the predicted and actual ship boundaries.
+
+### Notebooks
+The development and experimentation process are documented in Jupyter notebooks, providing detailed insights into our methodology, thought processes, and key findings. The notebooks included in this repository are as follows:
+
+1. `airbus-ship-segment-everything.ipynb`: This notebook incorporates the recent Segment-Everything model from Meta AI and adapts it for binary classification in the context of ship segmentation.
+
+2. `airbus-ship-segmentation.ipynb`: This notebook contains the primary codebase for the U-Net model implementation using tf.keras. It serves as the core task implementation for ship segmentation and has been adapted specifically for a Kaggle notebook.
+
+3. `airbus-ship-segmentation_models.ipynb`: This notebook explores an alternative approach by utilizing a pre-trained encoder based on the ResNet34 architecture. The segmentation_models library is used to experiment with this approach, leveraging the benefits of transfer learning and high-level feature extraction.
+
+4. ` 
+
+These notebooks provide a comprehensive overview of our work, including code, documentation, and insights, ensuring transparency, understanding, and reproducibility of our research.
+
 
 ## Prerequisites 
 
@@ -60,6 +81,7 @@ This project has a modular structure and is divided into several Python scripts 
     - airbus-ship-segment-everything.ipynb
     - airbus-ship-segmentation.ipynb
     - airbus-ship-segmentation_models.ipynb
+    - 
   - 📁 __pycache__
     - data_preprocessing.cpython-310.pyc
     - model_creation.cpython-310.pyc
