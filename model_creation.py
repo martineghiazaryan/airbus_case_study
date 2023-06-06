@@ -8,7 +8,7 @@ def weighted_binary_crossentropy(y_true, y_pred, weight_factor):
     # Convert y_true to float32 data type
     y_true = tf.cast(y_true, tf.float32)
     
-    # Compute the binary cross-entropy loss
+    # Computing the binary cross-entropy loss
     binary_loss = binary_crossentropy(y_true, y_pred)
     
     # Apply the weight factor to the ship class predictions
@@ -17,6 +17,7 @@ def weighted_binary_crossentropy(y_true, y_pred, weight_factor):
     return weighted_loss
 
 
+# Defining the U-Net model using the functional setup
 
 def build_unet(input_shape, n_classes):
     inputs = Input(input_shape)
