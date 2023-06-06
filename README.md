@@ -222,10 +222,13 @@ Example:
 
 Remember to adjust these paths to fit your specific directory structure and naming conventions.
 
-
-## References
-<!-- List of resources and references used in your project -->
-
 ## Contact
-<!-- Your contact information -->
+[Back to top](#table-of-contents)
+
+For any questions or feedback, feel free to reach out to me:
+
+- **LinkedIn**: [My LinkedIn Profile](https://www.linkedin.com/in/martin-yeghiazaryan/)
+- **Email**: [martineghiazaryan@gmail.com](mailto:martineghiazaryan@gmail.com)
+
+
 
