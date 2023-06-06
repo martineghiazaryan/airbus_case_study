@@ -210,15 +210,15 @@ Example:
 ```python
 img_dir = 'd:/Profils/myeghiazaryan/Downloads/train_v2/'  # Change this to your directory
 ```
-2. **Model Path:** This is the location where the trained model .h5 file is saved. The path is specified in train_model.py for saving the trained model and run_inference.py for loading the trained model.
+2. **Model Path:** This is the location where the trained model .h5 file is saved. The path is specified in train_model.py for saving the trained model and ``run_inference.py`` for loading the trained model.
 
 Example:
 
 ``model_path = 'd:/Profils/myeghiazaryan/Desktop/airbus_case_study/models/model_best_checkpoint.h5'``  # Change this to your path
 
-3. **Dataframe CSV Files:** In train_model.py, the paths to train_df.csv and valid_df.csv should be updated to the location where these CSV files are saved in your environment.
+3. **Dataframe CSV Files:** In ``train_model.py``, the paths to ``train_df.csv`` and ``valid_df.csv`` should be updated to the location where these CSV files are saved in your environment.
 
-4. **Numpy Data Files:** In train_model.py, the paths to X_train.npy, y_train.npy, X_valid.npy, and y_valid.npy need to be set to the desired save/load location for these numpy data files.
+4. **Numpy Data Files:** In ``train_model.py``, the paths to ``X_train.npy``, ``y_train.npy``, ``X_valid.npy``, and ``y_valid.npy`` need to be set to the desired save/load location for these numpy data files.
 
 Remember to adjust these paths to fit your specific directory structure and naming conventions.
 
