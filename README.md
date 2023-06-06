@@ -222,6 +222,11 @@ test_img_dir = 'd:/Profils/myeghiazaryan/Downloads/test_v2/'
 model_path = 'd:/Profils/myeghiazaryan/Desktop/airbus_case_study/models/model_best_checkpoint.h5'
 run_inference(test_img_dir, model_path)
 ```
+If you want to see segmentations of the ships you can simply run the ``model_inference.py`` file by running the following command:
+
+```python
+python model_inference.py
+```
 
 ## Configuring Your Paths
 
