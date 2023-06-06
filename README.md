@@ -1,17 +1,20 @@
 # Airbus Ship Detection - Segmentation Model
 
 ## Table of Contents
-1. [Introduction](#introduction)
-2. [Prerequisites](#prerequisites)
-3. [Folder Structure](#folder-structure) 
-4. [Dataset](#dataset)
-5. [Methodology](#methodology)
-6. [Installation](#installation)
-7. [Usage](#usage)
-8. [Results](#results)
-9. [Future Enhancements](#future-enhancements)
-10. [References](#references)
-11. [Contact](#contact)
+- [Introduction](#introduction)
+- [Prerequisites](#prerequisites)
+- [Folder Structure](#folder-structure)
+- [Dataset](#dataset)
+- [Methodology](#methodology)
+    - [Data Cleaning & Preprocessing](#data-cleaning--preprocessing)
+    - [Model Architecture](#model-architecture)
+    - [Model Development](#model-development)
+    - [Training the Model](#training-the-model)
+- [Running Inference on Test Images](#running-inference-on-test-images)
+- [Configuring Your Paths](#configuring-your-paths)
+- [References](#references)
+- [Contact](#contact)
+
 
 ## Introduction
 Talk about the problem.
