@@ -14,7 +14,9 @@
 11. [Contact](#contact)
 
 ## Introduction
-<!-- Write about your project, why you chose it, and what problem it solves -->
+Talk about the problem.
+Talk about the work done.
+talk about the notebooks (whats the difference between them).
 
 ## Prerequisites 
 
@@ -109,43 +111,113 @@ Each image can contain multiple ships or no ships at all, and the task is to ide
 
 ## Methodology
 
-This project utilizes a step-by-step approach to detect ships in satellite images, consisting of data cleaning and preprocessing, model development, training, and evaluation.
+Here step-by-step approach to detect ships in satellite images, consisting of data cleaning and preprocessing, model development, training, and evaluation.
 
 ### Data Cleaning & Preprocessing
 
-The data preprocessing includes the loading and filtering of the initial dataset, which is located in the `train_ship_segmentations_v2.csv` file. The first 5000 images are kept for processing. This dataset is then divided into two parts: images with ships (`ships_df`) and images without ships (`no_ships_df`). Each part is further split into training and validation datasets, with 80% for training and 20% for validation.
+The data preprocessing includes the loading and filtering of the initial dataset, which is located in the `train_ship_segmentations_v2.csv` file. The first 5000 images are kept for processing because the RAM of the kaggle notebook was crushing (it is limited). This dataset is then divided into two parts: images with ships (`ships_df`) and images without ships (`no_ships_df`). Each part is further split into training and validation datasets, with 80% for training and 20% for validation.
 
 The script also includes a `preprocess_data` function for resizing images and masks and converting the masks to categorical format. A `preprocess_test_data` function is included for resizing the test images.
 
-The resulting datasets are then saved as `train_df.csv` and `valid_df.csv` for further use.
+The resulting datasets are then saved as `train_df.csv` and `valid_df.csv` for further use. These are the files that you can see in the repository root.
+
+## Model Architecture
+
+The model used in this project is based on the U-Net architecture, a type of convolutional neural network that was originally developed for biomedical image segmentation. It's known for its "U" shape, which comes from a series of down-sampling layers , followed by an up-sampling path  which restores the original resolution of the image. The encoder and decoder parts are connected by skip connections that allow low-level feature maps to be directly fed into the decoder part of the network.
+
+In this script, the U-Net model is implemented using TensorFlow's Keras API. The model is defined using the functional API, which allows for more flexibility in connecting layers and defining complex models.
+
+The U-Net model implemented in this script consists of:
+
+1. **Encoder Part**: The encoder part is composed of three blocks, each containing two convolutional layers followed by a max pooling layer. The number of filters in the convolutional layers doubles with each block, starting with 64 in the first block.
+
+2. **Bottom Part**: The bottom of the U-Net (between the encoder and decoder parts) consists of two convolutional layers with 512 filters each.
+
+3. **Decoder Part**: The decoder part is also composed of three blocks. Each block starts with an up-sampling layer, followed by a concatenation with the corresponding block in the encoder part, and then two convolutional layers. The number of filters in the convolutional layers halves with each block, starting with 256 in the first block.
+
+4. **Output Layer**: The final layer is a convolutional layer with a number of filters equal to the number of classes in the target (i.e., `n_classes`). This layer uses the softmax activation function to output probabilities for each class.
+
+In addition to the U-Net model, this script also defines a custom loss function called `weighted_binary_crossentropy`. This loss function computes the binary cross-entropy loss, but applies a weight factor to the predictions for the ship class. This can be useful if the classes in the target are imbalanced, as it gives more importance to the minority class.
+
+To build and compile the model, simply call the `build_unet` function with the desired input shape and number of classes.
 
 ### Model Development
 
 The model used in this project is a custom TensorFlow model defined in `model_creation.py`. This model uses a custom metric function `dice_coef`, defined in `model_training.py`.
 
-### Training
+## Training the Model
 
-The training of the model is performed in the `model_training.py` module. The training process can be started from a previously trained model, or from scratch. By default, the code is set to load a previously trained model, but you can uncomment the line `mt.train_model(model)` to continue training from the loaded model. If you want to start training from scratch, call `mt.train_model()` without any arguments.
+The `train_model.py` script is responsible for training the U-Net model on the image segmentation task. It uses the training and validation data prepared by the `data_preprocessing.py` script and the model defined by the `model_creation.py` script. This script also contains two additional performance metrics: IoU coefficient and Dice coefficient.
 
-### Evaluation
+### Metrics
 
-The evaluation of the model is performed by the `model_inference.py` module. It uses the trained model to perform inference on a set of test images, located in the `test_img_dir` directory.
+- **Intersection over Union (IoU):** This metric measures the overlap between the true and predicted segmentations. A higher IoU score means a better match.
 
-## Installation
+- **Dice Coefficient:** This metric is similar to IoU but is twice the area of overlap divided by the total number of pixels in both images. It ranges between 0 (no overlap) and 1 (perfect match). It is good for imbalanced dataset.
 
-To run this code, you'll need to have Python, TensorFlow, and OpenCV installed, along with the required libraries mentioned at the start of the script (numpy, pandas, sklearn, keras). You'll also need to have the `model_creation.py`, `model_training.py`, and `model_inference.py` scripts in the same directory.
+### Training Procedure
 
-## Usage
+The model is trained using the Adam optimizer and binary cross entropy loss. The training procedure includes the following steps:
 
-To use this code, simply run the script from the command line. Make sure to replace the `test_img_dir` and `model_path` with the paths to your test images directory and your trained model, respectively. The `model_path` is currently set to a .h5 file, which is the format used to store the trained TensorFlow model.
+1. Loading the training and validation data. If preprocessed data is already saved as `.npy` files, the script loads this data. If not, we the `preprocess_data` function from `data_preprocessing.py` to preprocess the data and save it as `.npy` files.
 
-## Results
+2. Building and compiling the U-Net model. If a pre-existing model is provided, the script uses this model. If not, the script builds a new model using the `build_unet` function from `model_creation.py`.
 
-The results will be outputted by the `model_inference.py` module as it performs inference on the test images.
+3. Training the model on the training data for a specified number of epochs, using the Adam optimizer and binary cross entropy loss. The model's performance is evaluated on the validation data at the end of each epoch. 
 
-## Future Enhancements
+4. Saving the best model based on the validation performance during training.
 
-Future enhancements to this project could include refining the model architecture for improved accuracy, expanding the training set to include more images, and implementing more complex data augmentation techniques to improve model generalization.
+To train the model, simply call the `train_model` function. This function returns the trained model and the history of training (including the training and validation loss and metrics at each epoch).
+
+## Running Inference on Test Images
+
+The `run_inference.py` script loads a trained model and uses it to make predictions on a set of test images. These images are randomly selected from a specified directory. The script also includes a function to plot the original images alongside the predicted segmentations.
+
+### Inference Procedure
+
+The script follows these steps:
+
+1. **Load the trained model:** The `load_trained_model` function is used to load the trained model saved as a `.h5` file. The model is compiled during this loading process.
+
+2. **Prepare the test images:** A list of image names is obtained from the test image directory. The script then randomly selects a certain number of images from this list (currently set to 20 images) for prediction.
+
+3. **Preprocess the test images:** Each test image is preprocessed using the `preprocess_test_data` function from `data_preprocessing.py`.
+
+4. **Make predictions:** The trained model is used to make predictions on the preprocessed test images.
+
+5. **Plot the predictions:** The `plot_predictions` function is used to plot the original image and the predicted segmentation side by side.
+
+To run the inference, simply call the `run_inference` function with the path to your test images directory and the path to the trained model as arguments.
+
+### Example Usage
+
+```python
+test_img_dir = 'd:/Profils/myeghiazaryan/Downloads/test_v2/'
+model_path = 'd:/Profils/myeghiazaryan/Desktop/airbus_case_study/models/model_best_checkpoint.h5'
+run_inference(test_img_dir, model_path)
+```
+
+## Configuring Your Paths
+
+In order to utilize this repository with your own data, you will need to adjust various file and directory paths within the scripts to match your own environment. Here's a summary of what might need to be changed:
+
+1. **Image Directory:** This is the directory where your image data resides. For both the training and testing scripts, you need to set this to point to your own image directories. These are specified in the scripts `data_preprocessing.py` and `run_inference.py` with the variable `img_dir`.
+
+Example:
+```python
+img_dir = 'd:/Profils/myeghiazaryan/Downloads/train_v2/'  # Change this to your directory
+```
+2. **Model Path:** This is the location where the trained model .h5 file is saved. The path is specified in train_model.py for saving the trained model and run_inference.py for loading the trained model.
+
+Example:
+
+``model_path = 'd:/Profils/myeghiazaryan/Desktop/airbus_case_study/models/model_best_checkpoint.h5'``  # Change this to your path
+
+3. **Dataframe CSV Files:** In train_model.py, the paths to train_df.csv and valid_df.csv should be updated to the location where these CSV files are saved in your environment.
+
+4. **Numpy Data Files:** In train_model.py, the paths to X_train.npy, y_train.npy, X_valid.npy, and y_valid.npy need to be set to the desired save/load location for these numpy data files.
+
+Remember to adjust these paths to fit your specific directory structure and naming conventions.
 
 
 ## References
