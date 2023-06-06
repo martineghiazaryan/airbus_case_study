@@ -3,7 +3,7 @@
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Prerequisites](#prerequisites)
-3. [Folder Structure](#folder-structure)
+3. [Folder Structure](#folder-structure) 
 4. [Dataset](#dataset)
 5. [Methodology](#methodology)
 6. [Installation](#installation)
@@ -16,8 +16,21 @@
 ## Introduction
 <!-- Write about your project, why you chose it, and what problem it solves -->
 
-## Prerequisites
-<!-- List the programming languages, libraries, and frameworks you used in this project -->
+## Prerequisites 
+
+Before you can run the code in this repository, there are a few steps that you need to follow:
+
+1. **Download the preprocessed data**: To save time on preprocessing, you can download the preprocessed `X_train`, `y_train`, `X_valid`, and `y_valid` datasets directly from this [link](https://drive.google.com/file/d/1bEcS5kJSgKq3-Xg4FpWQAfjKK3z1S3sR/view?usp=sharing). Once downloaded, please locate these files in the root directory of this project.
+
+2. **Download the original dataset**: The original dataset, along with the images, can be downloaded from the following Kaggle competition - [Airbus Ship Detection](https://www.kaggle.com/c/airbus-ship-detection/data). Please download and change the corresponding paths to the images folders in the code. 
+
+Here is the folder structure for the dataset that you will need:
+
+- 📁 airbus-ship-detection
+  - 📁 test_v2
+  - 📁 train_v2
+  - train_ship_segmentations_v2.csv
+
 
 ## Folder Structure
 
@@ -80,7 +93,19 @@ The repository also contains the following directories:
 
 
 ## Dataset
-<!-- Describe the Airbus Ship Detection dataset and any preprocessing steps you took -->
+
+The data used in this project comes from the [Airbus Ship Detection Challenge](https://www.kaggle.com/c/airbus-ship-detection/data) hosted on Kaggle. The challenge of this competition is to detect ships in satellite images as quickly as possible.
+
+The dataset is structured as follows:
+
+- The `train_v2` folder contains a set of jpg images, each of which can contain multiple ships. 
+- The `test_v2` folder contains jpg images in the public test set.
+- The `train_ship_segmentations_v2.csv` file provides the run-length encoded pixel locations of the ship for the training images. 
+
+The images were acquired by Airbus' Pleiades satellites, which are capable of detailed imaging with a resolution of up to 0.5 meters.
+
+Each image can contain multiple ships or no ships at all, and the task is to identify the presence of ships in these images and also locate them. For more detailed information about the dataset, please refer to the competition's [official webpage](https://www.kaggle.com/c/airbus-ship-detection/data).
+
 
 ## Methodology
 <!-- Step-by-step description of your methods -->
