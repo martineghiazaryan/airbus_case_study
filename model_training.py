@@ -1,5 +1,5 @@
-import numpy as np
 import os
+import numpy as np
 import tensorflow as tf
 from keras import backend as K
 from model_creation import build_unet

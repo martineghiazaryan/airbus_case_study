@@ -1,3 +1,17 @@
+from tensorflow.keras.preprocessing.image import img_to_array
+from keras.utils import to_categorical
+import numpy as np
+import cv2
+import os
+
+img_dir = '/kaggle/input/airbus-ship-detection/train_v2/'
+
+
+border = 5
+im_chan = 3
+n_classes = 2 
+
+
 def rle_decode(mask_rle, shape=(768, 768)):
     s = mask_rle.split()
     starts, lengths = [np.asarray(x, dtype=int) for x in (s[0:][::2], s[1:][::2])]
@@ -8,14 +22,6 @@ def rle_decode(mask_rle, shape=(768, 768)):
         img[lo:hi] = 1
     return img.reshape(shape).T
 
-
-from tensorflow.keras.preprocessing.image import img_to_array
-
-from keras.utils import to_categorical
-
-border = 5
-im_chan = 3
-n_classes = 2 
 
 def preprocess_data(img_ids, img_dir, df, train=True):
     """This function preprocesses the image and mask data"""
@@ -61,14 +67,10 @@ def preprocess_data(img_ids, img_dir, df, train=True):
     return X, y
 
 
-img_dir = '/kaggle/input/airbus-ship-detection/train_v2/'
-
-
 train_ids = train_df['ImageId'].values
 valid_ids = valid_df['ImageId'].values
 
 
-import os
 
 if os.path.exists('X_train.npy') and os.path.exists('y_train.npy'):
 

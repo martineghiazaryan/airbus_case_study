@@ -1,6 +1,8 @@
 
 import tensorflow as tf
 from tensorflow.keras.losses import binary_crossentropy
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, UpSampling2D, Dropout, concatenate
 
 def weighted_binary_crossentropy(y_true, y_pred, weight_factor):
     # Convert y_true to float32 data type
@@ -15,11 +17,6 @@ def weighted_binary_crossentropy(y_true, y_pred, weight_factor):
     return weighted_loss
 
 
-# In[16]:
-
-
-from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, UpSampling2D, Dropout, concatenate
 
 def build_unet(input_shape, n_classes):
     inputs = Input(input_shape)
