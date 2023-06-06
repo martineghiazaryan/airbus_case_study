@@ -12,7 +12,7 @@
     - [Training the Model](#training-the-model)
 - [Running Inference on Test Images](#running-inference-on-test-images)
 - [Configuring Your Paths](#configuring-your-paths)
-- [References](#references)
+- [Results](#results)
 - [Contact](#contact)
 
 
@@ -221,6 +221,8 @@ Example:
 4. **Numpy Data Files:** In train_model.py, the paths to X_train.npy, y_train.npy, X_valid.npy, and y_valid.npy need to be set to the desired save/load location for these numpy data files.
 
 Remember to adjust these paths to fit your specific directory structure and naming conventions.
+
+## Results
 
 ## Contact
 [Back to top](#table-of-contents)
