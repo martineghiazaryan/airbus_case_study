@@ -108,31 +108,45 @@ Each image can contain multiple ships or no ships at all, and the task is to ide
 
 
 ## Methodology
-<!-- Step-by-step description of your methods -->
+
+This project utilizes a step-by-step approach to detect ships in satellite images, consisting of data cleaning and preprocessing, model development, training, and evaluation.
 
 ### Data Cleaning & Preprocessing
-<!-- Details about the preprocessing steps and any transformations done on the data -->
+
+The data preprocessing includes the loading and filtering of the initial dataset, which is located in the `train_ship_segmentations_v2.csv` file. The first 5000 images are kept for processing. This dataset is then divided into two parts: images with ships (`ships_df`) and images without ships (`no_ships_df`). Each part is further split into training and validation datasets, with 80% for training and 20% for validation.
+
+The script also includes a `preprocess_data` function for resizing images and masks and converting the masks to categorical format. A `preprocess_test_data` function is included for resizing the test images.
+
+The resulting datasets are then saved as `train_df.csv` and `valid_df.csv` for further use.
 
 ### Model Development
-<!-- Details about the model used, why it was chosen, and how it was implemented -->
+
+The model used in this project is a custom TensorFlow model defined in `model_creation.py`. This model uses a custom metric function `dice_coef`, defined in `model_training.py`.
 
 ### Training
-<!-- Details about how the model was trained, what kind of split was used for the training and validation sets -->
+
+The training of the model is performed in the `model_training.py` module. The training process can be started from a previously trained model, or from scratch. By default, the code is set to load a previously trained model, but you can uncomment the line `mt.train_model(model)` to continue training from the loaded model. If you want to start training from scratch, call `mt.train_model()` without any arguments.
 
 ### Evaluation
-<!-- Details about how the model's performance was evaluated -->
+
+The evaluation of the model is performed by the `model_inference.py` module. It uses the trained model to perform inference on a set of test images, located in the `test_img_dir` directory.
 
 ## Installation
-<!-- Instructions for setting up and installing your project -->
+
+To run this code, you'll need to have Python, TensorFlow, and OpenCV installed, along with the required libraries mentioned at the start of the script (numpy, pandas, sklearn, keras). You'll also need to have the `model_creation.py`, `model_training.py`, and `model_inference.py` scripts in the same directory.
 
 ## Usage
-<!-- Instructions on how to use your code, run the scripts -->
+
+To use this code, simply run the script from the command line. Make sure to replace the `test_img_dir` and `model_path` with the paths to your test images directory and your trained model, respectively. The `model_path` is currently set to a .h5 file, which is the format used to store the trained TensorFlow model.
 
 ## Results
-<!-- Explanation of the results -->
+
+The results will be outputted by the `model_inference.py` module as it performs inference on the test images.
 
 ## Future Enhancements
-<!-- Any improvements that can be done or features that can be added in the future -->
+
+Future enhancements to this project could include refining the model architecture for improved accuracy, expanding the training set to include more images, and implementing more complex data augmentation techniques to improve model generalization.
+
 
 ## References
 <!-- List of resources and references used in your project -->
