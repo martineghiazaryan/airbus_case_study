@@ -37,7 +37,7 @@ The development and experimentation process are documented in Jupyter notebooks,
 
 3. `airbus-ship-segmentation_models.ipynb`: This notebook explores an alternative approach by utilizing a pre-trained encoder based on the ResNet34 architecture. The segmentation_models library is used to experiment with this approach, leveraging the benefits of transfer learning and high-level feature extraction.
 
-4. ` 
+4. `exploratory-analysis.ipynb`: This notebook includes some exploratory data analyisis.
 
 These notebooks provide a comprehensive overview of our work, including code, documentation, and insights, ensuring transparency, understanding, and reproducibility of our research.
 
@@ -81,7 +81,7 @@ This project has a modular structure and is divided into several Python scripts 
     - airbus-ship-segment-everything.ipynb
     - airbus-ship-segmentation.ipynb
     - airbus-ship-segmentation_models.ipynb
-    - 
+    - exploratory-analysis.ipynb
   - 📁 __pycache__
     - data_preprocessing.cpython-310.pyc
     - model_creation.cpython-310.pyc
@@ -111,6 +111,7 @@ The repository also contains the following directories:
     - `airbus-ship-segment-everything.ipynb`: This notebook includes the recent Segment-Everything model from Meta AI. In integrated the model and adjusted it to do binary classification in our case of ship-segmentation.
     - `airbus-ship-segmentation.ipynb`: This notebook is the same model version that I wrote in this repository only in the version of kaggle notebook.
     - `airbus-ship-segmentation_models.ipynb`: This notebook presents another aproach that I tried which is to use a pre-trained encoder based on resnet34 also using and experimenting with the **segmentation_model** library.
+    - `exploratory-analysis.ipynb`: This notebook includes some exploratory data analyisis.
   
 - `.ipynb_checkpoints`: This directory contains checkpoint files from Jupyter notebooks, which are created while the notebook is open. 
 
