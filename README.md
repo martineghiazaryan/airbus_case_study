@@ -130,6 +130,10 @@ The dataset is structured as follows:
 - The `test_v2` folder contains jpg images in the public test set.
 - The `train_ship_segmentations_v2.csv` file provides the run-length encoded pixel locations of the ship for the training images. 
 
+The dataframe has two columns. The first column is the `ImageId` which basically has the image names as strings and the second column is the `EncodedPixels` which is the rle-encoded coordinates of the ship present in the images. RLE is run-length encoding. It is used to encode the location of foreground objects in segmentation. Instead of outputting a mask image, you give a list of start pixels and how many pixels after each of those starts is included in the mask.
+
+The images are of resultion 768x768 pixels.
+
 The images were acquired by Airbus' Pleiades satellites, which are capable of detailed imaging with a resolution of up to 0.5 meters.
 
 Each image can contain multiple ships or no ships at all, and the task is to identify the presence of ships in these images and also locate them. For more detailed information about the dataset, please refer to the competition's [official webpage](https://www.kaggle.com/c/airbus-ship-detection/data).
@@ -251,6 +255,16 @@ Example:
 Remember to adjust these paths to fit your specific directory structure and naming conventions.
 
 ## Results
+
+Although the primary focus was the development and training of the U-Net model, due to constraints such as limited RAM, computational power, and time, I was note able to optimally train this model. 
+
+However, despite these limitations, I managed to successfully leverage the segmentation_models library, and also the very recent open source Segment-Everything model from Meta.AI. This model was adapted for binary classification, facilitating the segmentation of ships within the satellite imagery.
+
+I evaluated the performance using the Dice score, getting not very bad results for my trained U-Net model promising results with the segmentation_models' pretrained encoder and comparingly good segmentation results with the adapted model from Meta.AI. For a detailed breakdown of the results and performance metrics, please refer to the respective Jupyter notebooks.
+
+![alt text](https://github.com/[martineghiazaryan]/[airbus_case_study]/blob/[branch]/image.jpg?raw=true)
+
+
 
 ## Contact
 [Back to top](#table-of-contents)
