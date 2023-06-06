@@ -33,8 +33,10 @@ def plot_predictions(predicted_segmentation, original_image):
 
 if __name__ == "__main__":
     # Define the path to your test images directory
-    test_img_dir = '/kaggle/input/airbus-ship-detection/test_v2/'
-    model_path = 'model_best_checkpoint.h5' # the path to the model
+    # test_img_dir = '/kaggle/input/airbus-ship-detection/test_v2/'
+
+    test_img_dir = ''
+    model_path = '/models/model_best_checkpoint.h5' # the path to the model
 
     # Load the model
     model = load_trained_model(model_path)
