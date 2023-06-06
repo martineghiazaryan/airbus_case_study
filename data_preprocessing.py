@@ -100,3 +100,23 @@ else:
     np.save('X_valid.npy', X_valid)
     np.save('y_valid.npy', y_valid)
 
+def preprocess_test_data(img_ids, img_dir):
+    """This function preprocesses the image data"""
+    X = np.zeros((len(img_ids), 256, 256, im_chan), dtype=np.uint8)
+
+    for n, id_ in enumerate(img_ids):
+        img_path = os.path.join(img_dir, id_)  # use os.path.join for safer path construction
+        if not os.path.exists(img_path):
+            print(f"Image path does not exist: {img_path}")
+            continue
+
+        # Load image
+        img = cv2.imread(img_path)
+        if img is None:
+            print(f"Failed to read image: {img_path}")
+            continue
+
+        img = cv2.resize(img, (256, 256))  
+        X[n] = img
+
+    return X
