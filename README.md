@@ -262,9 +262,19 @@ However, despite these limitations, I managed to successfully leverage the segme
 
 I evaluated the performance using the Dice score, getting not very bad results for my trained U-Net model promising results with the segmentation_models' pretrained encoder and comparingly good segmentation results with the adapted model from Meta.AI. For a detailed breakdown of the results and performance metrics, please refer to the respective Jupyter notebooks.
 
-![alt text](https://github.com/[martineghiazaryan]/[airbus_case_study]/blob/[branch]/image.jpg?raw=true)
+My trained model:
+![alt text](figures/my_model.png)
 
+Resnet34 encoder pretrained model:
+![alt text](figures/resnet34.png)
 
+Segment-Everything Meta AI model:
+![alt text](figures/segment_everything1.png)
+![alt text](figures/segment_everything2.png)
+
+In conclusion, while the results we've achieved have been promising, there is a lot more potential for improvement. The field of semantic segmentation is vast and rich, and the insights I can derive from it are far from exhausted. This is only the beginning of our journey. 
+
+As with any Machine Learning project, the key lies in continuous improvement and refinement of our model. Given more time and resources, I'm confident that I can significantly enhance the model's performance. The experience of working on this project has been profoundly enriching and I look forward to diving deeper into this fascinating domain.
 
 ## Contact
 [Back to top](#table-of-contents)
